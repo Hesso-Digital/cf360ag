@@ -52,7 +52,7 @@
 @font-face {
   font-family: "Roboto Flex:Regular";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
   src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
 }
 
@@ -73,7 +73,7 @@
 @font-face {
   font-family: "Roboto_flex:Regular";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
   src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
 }
 
@@ -191,10 +191,18 @@ button[data-selected="true"]::before {
 
 /* ── Overview / Details section fixes ─────────────────────── */
 
-/* Labels: lighter colour and regular weight */
+/* Muted field labels: semibold Roboto Flex */
+[data-name="Field value items"] > div p,
+[data-name="List items"] [class*="Roboto_flex:Semi-bold"],
+[data-name="List items"] [class*="Roboto_flex:Semi-bold"] p,
+[data-name=".Summary panel"] [class*="Roboto_flex:Semi-bold"],
+[data-name=".Summary panel"] [class*="Roboto_flex:Semi-bold"] p {
+  font-weight: 600 !important;
+  font-variation-settings: "wght" 600 !important;
+}
+
 [data-name="Field value items"] > div p {
   color: rgba(0, 29, 84, 0.45) !important;
-  font-weight: 400 !important;
 }
 
 /* Remove fixed heights so content flows naturally */

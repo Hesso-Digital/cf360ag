@@ -2,7 +2,7 @@ import svgPaths from "@/imports/CaseView/svg-z90n69mqgb";
 
 const poppins = { fontFamily: '"Poppins:SemiBold", sans-serif', fontWeight: 600 };
 const roboto = { fontFamily: '"Roboto_flex:Regular", sans-serif' };
-const robotoSemi = { fontFamily: '"Roboto_flex:Semi-bold", sans-serif', fontWeight: 600 };
+const robotoSemi = { fontFamily: '"Roboto_flex:Semi-bold", sans-serif', fontWeight: 600, fontVariationSettings: '"wght" 600' as const };
 
 const SUMMARY_FIELDS = [
   { label: "Work Status", value: "OPEN" },

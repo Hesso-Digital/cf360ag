@@ -2,6 +2,7 @@ import DataTable, { LinkCell } from "@/components/DataTable";
 import type { ColDef, RowData } from "@/components/DataTable";
 
 const roboto = { fontFamily: '"Roboto_flex:Regular",sans-serif' };
+const robotoLabel = { ...roboto, fontWeight: 600, fontVariationSettings: '"wght" 600' as const };
 const poppins = { fontFamily: '"Poppins:SemiBold",sans-serif', fontWeight: 600 };
 
 const missionsCols: ColDef[] = [
@@ -51,7 +52,7 @@ function DetailField({
 }) {
   return (
     <div className="flex flex-col py-[5px] min-w-0">
-      <p className="text-[13px] leading-normal" style={{ ...roboto, color: "rgba(0,29,84,0.55)" }}>
+      <p className="text-[13px] leading-normal" style={{ ...robotoLabel, color: "rgba(0,29,84,0.55)" }}>
         {label}
       </p>
       {link && value ? (

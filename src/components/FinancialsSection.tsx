@@ -3,6 +3,7 @@ import DataTable from "@/components/DataTable";
 import type { ColDef, RowData } from "@/components/DataTable";
 
 const roboto = { fontFamily: '"Roboto_flex:Regular",sans-serif' };
+const robotoLabel = { ...roboto, fontWeight: 600, fontVariationSettings: '"wght" 600' as const };
 const robotoBold = { fontFamily: '"Roboto_flex:Bold",sans-serif', fontWeight: 700 };
 const poppins = { fontFamily: '"Poppins:SemiBold",sans-serif', fontWeight: 600 };
 
@@ -38,7 +39,7 @@ function CosmoTab({
 function FieldRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col py-[5px]">
-      <p className="text-[13px] leading-normal" style={{ ...roboto, color: "rgba(0,29,84,0.55)" }}>
+      <p className="text-[13px] leading-normal" style={{ ...robotoLabel, color: "rgba(0,29,84,0.55)" }}>
         {label}
       </p>
       <p className="text-[14px] leading-normal text-[#001d54]" style={roboto}>
@@ -81,24 +82,34 @@ function ChevronDown({ open }: { open: boolean }) {
   );
 }
 
-function SummaryFieldRow({ line }: { line: SummaryLine }) {
+function KeyValueRow({
+  label,
+  value,
+  emphasize,
+  warning,
+}: {
+  label: string;
+  value: string;
+  emphasize?: boolean;
+  warning?: boolean;
+}) {
   return (
-    <div className="flex items-center justify-between gap-4 py-[5px]">
-      <span
-        className="text-[14px] leading-normal"
-        style={{ ...roboto, color: line.warning ? "#d91c29" : "rgba(0,29,84,0.55)" }}
+    <div className="flex items-center py-1">
+      <p
+        className="text-[14px] leading-normal m-0 w-[200px] shrink-0"
+        style={{ ...robotoLabel, color: warning ? "#d91c29" : "rgba(0,29,84,0.55)" }}
       >
-        {line.label}
-      </span>
-      <span
-        className="text-[14px] leading-normal shrink-0"
+        {label}
+      </p>
+      <p
+        className="text-[14px] leading-normal m-0"
         style={{
-          ...(line.emphasize ? robotoBold : roboto),
-          color: line.warning ? "#d91c29" : "#001d54",
+          ...(emphasize ? robotoBold : roboto),
+          color: warning ? "#d91c29" : "#001d54",
         }}
       >
-        {line.value}
-      </span>
+        {value}
+      </p>
     </div>
   );
 }
@@ -114,7 +125,7 @@ function SummaryStatCard({ title, lines }: { title: string; lines: SummaryLine[]
       </p>
       <div className="flex flex-col">
         {lines.map((line) => (
-          <SummaryFieldRow key={line.label} line={line} />
+          <KeyValueRow key={line.label} {...line} />
         ))}
       </div>
     </div>
@@ -141,7 +152,7 @@ function PartyGroup({
         type="button"
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
-        className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 w-full bg-transparent border-0 p-0 cursor-pointer mb-3 text-left"
+        className="flex flex-col gap-2 w-full bg-transparent border-0 p-0 cursor-pointer mb-3 text-left"
       >
         <span className="flex items-center gap-2 min-w-0">
           <ChevronDown open={open} />
@@ -149,21 +160,18 @@ function PartyGroup({
             {name}
           </span>
         </span>
-        <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1 pl-6 lg:pl-0">
-          {totals.map((total) => (
-            <span key={total.label} className="flex items-baseline gap-1 whitespace-nowrap">
-              <span className="text-[13px]" style={{ ...roboto, color: "rgba(0,29,84,0.55)" }}>
-                {total.label}:
-              </span>
-              <span
-                className="text-[14px] text-[#001d54]"
-                style={total.emphasize ? robotoBold : roboto}
-              >
-                {total.value}
-              </span>
-            </span>
-          ))}
-        </span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 pl-6">
+          <div className="flex flex-col min-w-0">
+            {totals.slice(0, 3).map((total) => (
+              <KeyValueRow key={total.label} {...total} />
+            ))}
+          </div>
+          <div className="flex flex-col min-w-0">
+            {totals.slice(3).map((total) => (
+              <KeyValueRow key={total.label} {...total} />
+            ))}
+          </div>
+        </div>
       </button>
       {open ? (
         <DataTable

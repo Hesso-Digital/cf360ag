@@ -21,7 +21,7 @@ function FieldItem({
   return (
     <div className="flex flex-col items-start py-[4px] w-full" data-name="Field value items">
       <div className="shrink-0" data-name="label-wrapper">
-        <p className={labelClass} style={{ color: "rgba(0,29,84,0.45)" }}>
+        <p className={labelClass} style={{ color: "rgba(0,29,84,0.45)", fontWeight: 600, fontVariationSettings: '"wght" 600' }}>
           {label}
         </p>
       </div>

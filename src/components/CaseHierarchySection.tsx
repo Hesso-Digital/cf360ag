@@ -1,4 +1,5 @@
 const roboto = { fontFamily: '"Roboto_flex:Regular",sans-serif' };
+const robotoLabel = { ...roboto, fontWeight: 600, fontVariationSettings: '"wght" 600' as const };
 const poppins = { fontFamily: '"Poppins:SemiBold",sans-serif', fontWeight: 600 };
 
 type HierarchyField = {
@@ -25,7 +26,7 @@ function MetaField({ label, value }: HierarchyField) {
     <div className="flex items-center py-1">
       <p
         className="text-[14px] leading-normal m-0 w-[200px] shrink-0"
-        style={{ ...roboto, color: "rgba(0,29,84,0.55)" }}
+        style={{ ...robotoLabel, color: "rgba(0,29,84,0.55)" }}
       >
         {label}
       </p>

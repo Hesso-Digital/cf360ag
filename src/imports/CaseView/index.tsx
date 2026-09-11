@@ -217,36 +217,20 @@ function SummaryPanelActions({ className, avatarSlot = null, buttonSlot = null, 
           <div className="content-stretch flex flex-col items-start pb-[8px] px-[20px] relative size-full">
             <div className="content-stretch cursor-pointer flex gap-[8px] items-center overflow-clip relative shrink-0" data-name="Button slot">
               {buttonSlot || (
-                <>
-                  <div className="bg-white h-[32px] max-h-[32px] relative rounded-[8px] shrink-0" data-name="Button">
-                    <div aria-hidden className="absolute border border-[#166ec5] border-solid inset-0 pointer-events-none rounded-[8px]" />
-                    <div className="flex flex-row items-center justify-center max-h-[inherit] size-full">
-                      <div className="content-stretch flex items-center justify-center max-h-[inherit] px-[16px] relative size-full">
-                        <div className="relative shrink-0" data-name="Container">
-                          <div className="content-stretch flex items-start relative size-full">
-                            <div className="[word-break:break-word] flex flex-col font-['Roboto_flex:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#166ec5] text-[14px] whitespace-nowrap">
-                              <p className="leading-[normal]">Add work</p>
-                            </div>
+                <div className="bg-white h-[32px] max-h-[32px] relative rounded-[8px] shrink-0" data-name="Button">
+                  <div aria-hidden className="absolute border border-[#166ec5] border-solid inset-0 pointer-events-none rounded-[8px]" />
+                  <div className="flex flex-row items-center justify-center max-h-[inherit] size-full">
+                    <div className="content-stretch flex items-center justify-center max-h-[inherit] px-[16px] relative size-full">
+                      <div className="relative shrink-0" data-name="Container">
+                        <div className="content-stretch flex items-start relative size-full">
+                          <div className="[word-break:break-word] flex flex-col font-['Roboto_flex:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#166ec5] text-[14px] whitespace-nowrap">
+                            <p className="leading-[normal]">Enrich Claim</p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-white h-[32px] max-h-[32px] relative rounded-[8px] shrink-0" data-name="Button">
-                    <div aria-hidden className="absolute border border-[#166ec5] border-solid inset-0 pointer-events-none rounded-[8px]" />
-                    <div className="flex flex-row items-center justify-center max-h-[inherit] size-full">
-                      <div className="content-stretch flex items-center justify-center max-h-[inherit] px-[16px] relative size-full">
-                        <div className="relative shrink-0" data-name="Container">
-                          <div className="content-stretch flex items-start relative size-full">
-                            <div className="[word-break:break-word] flex flex-col font-['Roboto_flex:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#166ec5] text-[14px] whitespace-nowrap">
-                              <p className="leading-[normal]">Add work</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
+                </div>
               )}
             </div>
           </div>

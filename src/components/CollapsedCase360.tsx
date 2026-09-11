@@ -11,6 +11,7 @@ import { EAFContent, FNOLContent, RDRContent, PriorLossesContent } from "./TabCo
 
 const poppins = { fontFamily: '"Poppins:SemiBold",sans-serif', fontWeight: 600 };
 const roboto = { fontFamily: '"Roboto_flex:Regular",sans-serif' };
+const robotoLabel = { ...roboto, fontWeight: 600, fontVariationSettings: '"wght" 600' as const };
 const robotoBold = { fontFamily: '"Roboto_flex:Bold",sans-serif', fontWeight: 700 };
 
 const CASE360_TABS = [
@@ -44,7 +45,7 @@ type OverviewTab = (typeof OVERVIEW_TABS)[number];
 function FieldRow({ label, value, blue }: { label: string; value: string; blue?: boolean }) {
   return (
     <div className="flex flex-col py-[5px]">
-      <p className="text-[13px] leading-normal" style={{ ...roboto, color: "rgba(0,29,84,0.55)" }}>{label}</p>
+      <p className="text-[13px] leading-normal" style={{ ...robotoLabel, color: "rgba(0,29,84,0.55)" }}>{label}</p>
       <p className="text-[14px] leading-normal" style={{ ...roboto, color: blue ? "#3f57e4" : "#001d54" }}>{value}</p>
     </div>
   );
