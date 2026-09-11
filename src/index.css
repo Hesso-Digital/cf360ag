@@ -1,0 +1,272 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: "Poppins:SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://static.figma.com/font/Poppins-SemiBold_6") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito Sans:Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://static.figma.com/font/NunitoSans_YTLC_opsz_wdth_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito Sans:Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://static.figma.com/font/NunitoSans_YTLC_opsz_wdth_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito Sans:SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://static.figma.com/font/NunitoSans_YTLC_opsz_wdth_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito_Sans:Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://static.figma.com/font/NunitoSans_YTLC_opsz_wdth_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito_Sans:Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://static.figma.com/font/NunitoSans_YTLC_opsz_wdth_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito_Sans:SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://static.figma.com/font/NunitoSans_YTLC_opsz_wdth_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto Flex:Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto Flex:SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto Flex:Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto_flex:Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto_flex:Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto_flex:Semi-bold";
+  font-style: normal;
+  font-weight: 400 900;
+  src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto_Flex:Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://static.figma.com/font/RobotoFlex_GRAD_XOPQ_XTRA_YOPQ_YTAS_YTDE_YTFI_YTLC_YTUC_opsz_slnt_wdth_wght__3") format("woff2");
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Subtle header separator — keeps 48px height via inset shadow */
+[data-name=".App header"] {
+  box-shadow: inset 0 -1px 0 rgba(0, 29, 84, 0.08);
+}
+
+/* ── Summary panel left tab active state ───────────────────── */
+
+/* When Overview is NOT the active tab, reset its hardcoded selected styling */
+[data-name="Case View"]:not([data-left-tab="Overview"]) [data-name="Opportunities"] {
+  background: white !important;
+  border-radius: 8px !important;
+}
+[data-name="Case View"]:not([data-left-tab="Overview"]) [data-name="Opportunities"] [data-name="Selected indicator"] {
+  background: transparent !important;
+}
+[data-name="Case View"]:not([data-left-tab="Overview"]) [data-name="Opportunities"] p {
+  color: #001d54 !important;
+  font-weight: 400 !important;
+  font-variation-settings: normal !important;
+}
+
+/* Selected state for any button tab */
+button[data-selected="true"] {
+  background: rgba(58, 83, 233, 0.1) !important;
+  border-radius: 0 8px 8px 0 !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+button[data-selected="true"] p {
+  color: #3f57e4 !important;
+  font-weight: 700 !important;
+}
+/* Blue left border indicator — matches the Overview selected indicator */
+button[data-selected="true"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 30px;
+  background: #3f57e4;
+  border-radius: 0 2px 2px 0;
+  pointer-events: none;
+}
+
+/* All summary tab buttons and the Overview div: pointer cursor */
+[data-name=".Vertical tabs"],
+[data-name="Tab type=Unselected"],
+[data-name="Opportunities"] {
+  cursor: pointer !important;
+}
+
+/* Overview div selected state (driven by JS data-selected attribute) */
+[data-name="Opportunities"][data-selected="false"] {
+  background: white !important;
+  border-radius: 8px !important;
+}
+[data-name="Opportunities"][data-selected="false"] [data-name="Selected indicator"] {
+  background: transparent !important;
+}
+[data-name="Opportunities"][data-selected="false"] p {
+  color: #001d54 !important;
+  font-weight: 400 !important;
+  font-variation-settings: normal !important;
+}
+
+
+/* Portal target: only the CaseView Details that directly contains our portal */
+[data-name="Details"]:has(> .details-portal) {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  width: 100% !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+/* Hide original static CaseView children — but not nested Details from imports */
+[data-name="Details"]:has(> .details-portal) > *:not(.details-portal) {
+  display: none !important;
+}
+.details-portal {
+  width: 100%;
+}
+
+/* ── Overview / Details section fixes ─────────────────────── */
+
+/* Labels: lighter colour and regular weight */
+[data-name="Field value items"] > div p {
+  color: rgba(0, 29, 84, 0.45) !important;
+  font-weight: 400 !important;
+}
+
+/* Remove fixed heights so content flows naturally */
+[data-name="Data templates"],
+[data-name="1 column, 2 groups"],
+[data-name="Frame"] {
+  height: auto !important;
+}
+
+/* Two-column grid for field groups; collapses to one column below 860px */
+[data-name="Data templates - detached"] {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+  height: auto !important;
+  padding-bottom: 16px;
+  flex: unset !important;
+  width: 100%;
+}
+
+[data-name="Data templates - detached"] > * {
+  flex: unset !important;
+  min-width: 0;
+  width: 100% !important;
+}
+
+@media (max-width: 860px) {
+  /* Collapse to single column */
+  [data-name="Data templates - detached"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Switch each field item from stacked to inline label + value */
+  [data-name="Field value items"] {
+    flex-direction: row !important;
+    align-items: baseline !important;
+    gap: 12px !important;
+    padding: 6px 0 !important;
+  }
+
+  /* Label: fixed width, no wrapping */
+  [data-name="Field value items"] > div {
+    flex: 0 0 140px !important;
+    max-width: 140px !important;
+    white-space: normal !important;
+    min-width: unset !important;
+    leading-none: true !important;
+  }
+
+  /* Value: takes remaining space */
+  [data-name="Field value items"] > p {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────── */
+
+/* Summary panel inner container: fill parent height */
+[data-name=".Summary panel"] {
+  height: 100% !important;
+}
+
+/* Page content: fill remaining column and scroll vertically */
+[data-name="Page content"] {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 20px;
+  scrollbar-width: none;
+}
+
+[data-name="Page content"]::-webkit-scrollbar {
+  display: none;
+}
