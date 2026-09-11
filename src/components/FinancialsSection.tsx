@@ -346,8 +346,8 @@ function CoverageGroup({
   return (
     <div className="w-full">
       <div className="px-5 mb-3">
-        <FieldRow label="Coverage" value={coverage} />
-        <FieldRow label="Total" value={total} />
+        <KeyValueRow label="Coverage" value={coverage} />
+        <KeyValueRow label="Total" value={total} />
       </div>
       <div className="px-5">
         <DataTable columns={deductibleCols} rows={rows} showToolbar={false} />

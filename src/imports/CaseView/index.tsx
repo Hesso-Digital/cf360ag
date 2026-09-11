@@ -7,6 +7,7 @@ import imgPhoto4 from "./8514c6650de5944b08ba1083fd16a00b48f8993e.png";
 import imgImage54 from "./abb3a16b2067ed28346e297fba6b9d23fec8beb5.png";
 import { useCaseLayout } from "@/components/CaseLayoutContext";
 import CollapsedSummaryBar from "@/components/CollapsedSummaryBar";
+import WorkAreaToolbar from "@/components/WorkAreaToolbar";
 import CaseViewLayout, { FlowUtilities } from "@/components/layout/CaseViewLayout";
 import UtilitiesRail from "@/components/utilities/UtilitiesRail";
 type CounterBadgeProps = {
@@ -2014,6 +2015,7 @@ function Details() {
 function WorkArea() {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-w-px overflow-clip relative" data-name="Work area">
+      <WorkAreaToolbar />
       <div className="relative rounded-[8px] shrink-0 w-full" data-name="Assignments">
         <div className="content-stretch flex flex-col items-start relative size-full">
           <div className="relative rounded-tl-[16px] rounded-tr-[16px] shrink-0 w-full" data-name="Life cycle">
