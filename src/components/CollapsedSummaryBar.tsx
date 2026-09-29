@@ -1,8 +1,24 @@
+import { useEffect, useId, useRef, useState } from "react";
 import svgPaths from "@/imports/CaseView/svg-z90n69mqgb";
 
 const poppins = { fontFamily: '"Poppins:SemiBold", sans-serif', fontWeight: 600 };
 const roboto = { fontFamily: '"Roboto_flex:Regular", sans-serif' };
 const robotoSemi = { fontFamily: '"Roboto_flex:Semi-bold", sans-serif', fontWeight: 600, fontVariationSettings: '"wght" 600' as const };
+const menuItemFont = {
+  fontFamily: '"Roboto_flex:Regular", sans-serif',
+  fontWeight: 500,
+  fontVariationSettings: '"wght" 500' as const,
+};
+
+const CLAIM_ACTIONS = [
+  "Resolve Case",
+  "Transfer Claim",
+  "Transfer Claim and Manage Skills",
+  "Create New Claim Unit",
+  "Reopen Claim File",
+  "Close Claim File",
+  "Open Providis Claim",
+] as const;
 
 const SUMMARY_FIELDS = [
   { label: "Work Status", value: "OPEN" },
@@ -49,6 +65,28 @@ function Field({ label, value, blue }: { label: string; value: string; blue?: bo
 }
 
 export default function CollapsedSummaryBar({ onExpand }: { onExpand: () => void }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRootRef = useRef<HTMLDivElement>(null);
+  const menuId = useId();
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onPointerDown = (event: MouseEvent) => {
+      if (!menuRootRef.current?.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
+
   return (
     <div
       className="relative z-20 w-full h-[64px] bg-white rounded-bl-[16px] shrink-0 overflow-visible"
@@ -75,7 +113,7 @@ export default function CollapsedSummaryBar({ onExpand }: { onExpand: () => void
           ))}
         </div>
 
-        <div className="flex items-center shrink-0">
+        <div ref={menuRootRef} className="relative flex items-center shrink-0">
           <button
             type="button"
             className="size-8 rounded-[8px] flex items-center justify-center cursor-pointer bg-transparent border-0"
@@ -87,13 +125,39 @@ export default function CollapsedSummaryBar({ onExpand }: { onExpand: () => void
           </button>
           <button
             type="button"
-            className="size-8 rounded-[8px] flex items-center justify-center cursor-pointer bg-transparent border-0"
-            title="More"
+            className={`size-8 rounded-[8px] flex items-center justify-center cursor-pointer border-0 ${menuOpen ? "bg-[rgba(0,29,84,0.06)]" : "bg-transparent"}`}
+            title="More actions"
+            aria-label="More actions"
+            aria-haspopup="menu"
+            aria-expanded={menuOpen}
+            aria-controls={menuId}
+            onClick={() => setMenuOpen((open) => !open)}
           >
             <svg className="size-[18px]" fill="none" viewBox="0 0 2.82825 13.4488">
               <path clipRule="evenodd" d={svgPaths.p27ad6300} fill="#001D54" fillRule="evenodd" />
             </svg>
           </button>
+          {menuOpen && (
+            <div
+              id={menuId}
+              role="menu"
+              aria-label="Claim actions"
+              className="absolute right-0 top-[calc(100%+4px)] z-50 flex w-max min-w-[225px] flex-col items-stretch bg-white p-0 rounded-[4px] shadow-[0px_2px_24px_rgba(5,5,5,0.3)]"
+            >
+              {CLAIM_ACTIONS.map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  role="menuitem"
+                  className="w-full cursor-pointer whitespace-nowrap border-0 bg-transparent px-4 py-2 text-left text-[14px] leading-[15px] text-[#001d54] hover:bg-[rgba(0,29,84,0.06)] focus-visible:bg-[rgba(0,29,84,0.06)] focus-visible:outline-none"
+                  style={menuItemFont}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
