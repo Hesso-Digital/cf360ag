@@ -185,14 +185,14 @@ export default function CollapsedSummaryBar({ onExpand }: { onExpand: () => void
                 role="menu"
                 aria-label="Claim actions"
                 style={menuStyle}
-                className="flex w-max min-w-[225px] flex-col items-stretch bg-white p-0 rounded-[4px] shadow-[0px_2px_24px_rgba(5,5,5,0.3)]"
+                className="flex w-max flex-col items-stretch bg-white p-0 rounded-[4px] shadow-[0px_2px_24px_rgba(5,5,5,0.3)]"
               >
                 {CLAIM_ACTIONS.map((label) => (
                   <button
                     key={label}
                     type="button"
                     role="menuitem"
-                    className="w-full cursor-pointer whitespace-nowrap border-0 bg-transparent px-4 py-2 text-left text-[14px] leading-[15px] text-[#001d54] hover:bg-[#eef1f8] focus-visible:bg-[#eef1f8] focus-visible:outline-none"
+                    className="box-border h-[31px] w-full cursor-pointer whitespace-nowrap border-0 bg-transparent pt-[7px] pr-[10px] pb-[8px] pl-[8px] text-left text-[16px] leading-[16px] text-[#001d54] hover:bg-[#eef1f8] focus-visible:bg-[#eef1f8] focus-visible:outline-none"
                     style={menuItemFont}
                     onClick={() => setMenuOpen(false)}
                   >
