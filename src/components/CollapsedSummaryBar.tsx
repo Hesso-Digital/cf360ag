@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { createPortal } from "react-dom";
 import svgPaths from "@/imports/CaseView/svg-z90n69mqgb";
 
 const poppins = { fontFamily: '"Poppins:SemiBold", sans-serif', fontWeight: 600 };
@@ -64,17 +65,62 @@ function Field({ label, value, blue }: { label: string; value: string; blue?: bo
   );
 }
 
+function placeClaimMenu(button: HTMLButtonElement, menu: HTMLElement): CSSProperties {
+  const buttonRect = button.getBoundingClientRect();
+  const bar = button.closest('[data-name="Collapsed summary bar"]');
+  const barBottom = bar?.getBoundingClientRect().bottom ?? buttonRect.bottom;
+  const top = Math.max(buttonRect.bottom + 4, barBottom + 4);
+  const width = menu.offsetWidth;
+  const rail = document.querySelector('[data-name=".Utilities panel (default)"]');
+  const railLeft = rail?.getBoundingClientRect().left;
+  let rightEdge = buttonRect.right;
+  if (railLeft != null && rightEdge > railLeft - 8) {
+    rightEdge = railLeft - 8;
+  }
+  if (rightEdge - width < 8) rightEdge = width + 8;
+  if (rightEdge > window.innerWidth - 8) rightEdge = window.innerWidth - 8;
+  return {
+    position: "fixed",
+    top,
+    right: window.innerWidth - rightEdge,
+    zIndex: 60,
+  };
+}
+
 export default function CollapsedSummaryBar({ onExpand }: { onExpand: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
+  const [menuStyle, setMenuStyle] = useState<CSSProperties>({
+    position: "fixed",
+    top: 0,
+    right: 8,
+    zIndex: 60,
+    visibility: "hidden",
+  });
+
+  useLayoutEffect(() => {
+    if (!menuOpen) return;
+    const button = buttonRef.current;
+    const menu = menuRef.current;
+    if (!button || !menu) return;
+    const place = () => {
+      if (!buttonRef.current || !menuRef.current) return;
+      setMenuStyle(placeClaimMenu(buttonRef.current, menuRef.current));
+    };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [menuOpen]);
 
   useEffect(() => {
     if (!menuOpen) return;
     const onPointerDown = (event: MouseEvent) => {
-      if (!menuRootRef.current?.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
+      const target = event.target as Node;
+      if (menuRootRef.current?.contains(target) || menuRef.current?.contains(target)) return;
+      setMenuOpen(false);
     };
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
@@ -124,8 +170,9 @@ export default function CollapsedSummaryBar({ onExpand }: { onExpand: () => void
             </svg>
           </button>
           <button
+            ref={buttonRef}
             type="button"
-            className={`size-8 rounded-[8px] flex items-center justify-center cursor-pointer border-0 ${menuOpen ? "bg-[rgba(0,29,84,0.06)]" : "bg-transparent"}`}
+            className={`size-8 rounded-[8px] flex items-center justify-center cursor-pointer border-0 ${menuOpen ? "bg-[#eef1f8]" : "bg-transparent"}`}
             title="More actions"
             aria-label="More actions"
             aria-haspopup="menu"
@@ -137,27 +184,31 @@ export default function CollapsedSummaryBar({ onExpand }: { onExpand: () => void
               <path clipRule="evenodd" d={svgPaths.p27ad6300} fill="#001D54" fillRule="evenodd" />
             </svg>
           </button>
-          {menuOpen && (
-            <div
-              id={menuId}
-              role="menu"
-              aria-label="Claim actions"
-              className="absolute right-0 top-[calc(100%+4px)] z-50 flex w-max min-w-[225px] flex-col items-stretch bg-white p-0 rounded-[4px] shadow-[0px_2px_24px_rgba(5,5,5,0.3)]"
-            >
-              {CLAIM_ACTIONS.map((label) => (
-                <button
-                  key={label}
-                  type="button"
-                  role="menuitem"
-                  className="w-full cursor-pointer whitespace-nowrap border-0 bg-transparent px-4 py-2 text-left text-[14px] leading-[15px] text-[#001d54] hover:bg-[rgba(0,29,84,0.06)] focus-visible:bg-[rgba(0,29,84,0.06)] focus-visible:outline-none"
-                  style={menuItemFont}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          )}
+          {menuOpen &&
+            createPortal(
+              <div
+                ref={menuRef}
+                id={menuId}
+                role="menu"
+                aria-label="Claim actions"
+                style={menuStyle}
+                className="flex w-max min-w-[225px] flex-col items-stretch bg-white p-0 rounded-[4px] shadow-[0px_2px_24px_rgba(5,5,5,0.3)]"
+              >
+                {CLAIM_ACTIONS.map((label) => (
+                  <button
+                    key={label}
+                    type="button"
+                    role="menuitem"
+                    className="w-full cursor-pointer whitespace-nowrap border-0 bg-transparent px-4 py-2 text-left text-[14px] leading-[15px] text-[#001d54] hover:bg-[#eef1f8] focus-visible:bg-[#eef1f8] focus-visible:outline-none"
+                    style={menuItemFont}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>,
+              document.body,
+            )}
         </div>
       </div>
 
