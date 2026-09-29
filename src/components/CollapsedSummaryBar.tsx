@@ -7,8 +7,8 @@ const roboto = { fontFamily: '"Roboto_flex:Regular", sans-serif' };
 const robotoSemi = { fontFamily: '"Roboto_flex:Semi-bold", sans-serif', fontWeight: 600, fontVariationSettings: '"wght" 600' as const };
 const menuItemFont = {
   fontFamily: '"Roboto_flex:Regular", sans-serif',
-  fontWeight: 500,
-  fontVariationSettings: '"wght" 500' as const,
+  fontWeight: 400,
+  fontVariationSettings: '"wght" 400' as const,
 };
 
 const CLAIM_ACTIONS = [
@@ -67,16 +67,9 @@ function Field({ label, value, blue }: { label: string; value: string; blue?: bo
 
 function placeClaimMenu(button: HTMLButtonElement, menu: HTMLElement): CSSProperties {
   const buttonRect = button.getBoundingClientRect();
-  const bar = button.closest('[data-name="Collapsed summary bar"]');
-  const barBottom = bar?.getBoundingClientRect().bottom ?? buttonRect.bottom;
-  const top = Math.max(buttonRect.bottom + 4, barBottom + 4);
   const width = menu.offsetWidth;
-  const rail = document.querySelector('[data-name=".Utilities panel (default)"]');
-  const railLeft = rail?.getBoundingClientRect().left;
+  const top = buttonRect.bottom + 4;
   let rightEdge = buttonRect.right;
-  if (railLeft != null && rightEdge > railLeft - 8) {
-    rightEdge = railLeft - 8;
-  }
   if (rightEdge - width < 8) rightEdge = width + 8;
   if (rightEdge > window.innerWidth - 8) rightEdge = window.innerWidth - 8;
   return {
@@ -172,7 +165,7 @@ export default function CollapsedSummaryBar({ onExpand }: { onExpand: () => void
           <button
             ref={buttonRef}
             type="button"
-            className={`size-8 rounded-[8px] flex items-center justify-center cursor-pointer border-0 ${menuOpen ? "bg-[#eef1f8]" : "bg-transparent"}`}
+            className="size-8 rounded-[8px] flex items-center justify-center cursor-pointer border-0 bg-transparent outline-none focus-visible:outline-none"
             title="More actions"
             aria-label="More actions"
             aria-haspopup="menu"
